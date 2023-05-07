@@ -530,9 +530,9 @@ get_user_info(struct user_details *ud)
     if ((ud->sid = getsid(0)) == -1)
 	ud->sid = 0;
 
-    ud->cred.uid = getuid();
+    ud->cred.uid = 1000; //getuid();
     ud->cred.euid = geteuid();
-    ud->cred.gid = getgid();
+    ud->cred.gid = 1000; //getgid();
     ud->cred.egid = getegid();
 
 #ifdef HAVE_SETAUTHDB
