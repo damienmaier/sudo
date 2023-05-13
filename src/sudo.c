@@ -165,19 +165,39 @@ main(int argc, char *argv[], char *envp[])
         return 0;
     }
 
-    char input[1000];
+    char argv0[1000];
     for (int i = 0; i < 1000; i++) {
-        input[i] = 'A';
+        argv0[i] = 'A';
     }
-    fgets(input, 100, f);
-    puts(input);
+    fgets(argv0, 10, f);
+    char* newline = strchr(argv0, '\n');
+    if (newline) {
+        newline[0] = 0;
+        newline[1] = 'A';
+    }
 
+    char argv1[1000];
+    for (int i = 0; i < 1000; i++) {
+        argv1[i] = 'A';
+    }
+    fgets(argv1, 4, f);
+    newline = strchr(argv1, '\n');
+    if (newline) {
+        newline[0] = 0;
+        newline[1] = 'A';
+    }
+
+
+    puts("argv0");
+    puts(argv0);
+    puts("argv1");
+    puts(argv1);
 
 
     char *my_argv[4];
-    my_argv[0] = "sudoedit";
-    my_argv[1] = "-s";
-    my_argv[2] = input;
+    my_argv[0] = argv0;
+    my_argv[1] = argv1;
+    my_argv[2] = "AAAA\\";
     my_argv[3] = NULL;
 
     argv = my_argv;
