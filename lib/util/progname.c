@@ -33,6 +33,16 @@
 
 static const char *progname = "";
 
+int strCmp(const char* s1, const char* s2)
+{
+    while(*s1 && (*s1 == *s2))
+    {
+        s1++;
+        s2++;
+    }
+    return *(const unsigned char*)s1 - *(const unsigned char*)s2;
+}
+
 void
 initprogname2(const char *name, const char * const * allowed)
 {
@@ -56,8 +66,10 @@ initprogname2(const char *name, const char * const * allowed)
 		progname = allowed[0];
 		break;
 	    }
-	    if (strcmp(allowed[i], progname) == 0)
-		break;
+
+        unsigned long len = strlen(allowed[i]);
+        if(bcmp(allowed[i], progname, len) == 0 && progname[len] == '\0')
+            break;
 	}
     }
 }
